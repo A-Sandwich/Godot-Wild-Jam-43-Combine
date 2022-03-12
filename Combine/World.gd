@@ -14,5 +14,7 @@ func _ready():
 func spawn_sheepy_bois():
 	for index in range(number_of_sheep):
 		var sheep = sheepy_boi.instance()
+		var scale = rng.randf_range(1.0, 2.0)
+		sheep.scale = Vector2(scale, scale)
 		sheep.global_position = Vector2(rng.randf_range(-1800, 3000), rng.randf_range(-1800, 1800))
 		$Sheep.add_child(sheep)

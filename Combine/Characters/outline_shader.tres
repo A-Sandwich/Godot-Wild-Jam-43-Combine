@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Characters/outline.gdshader" type="Shader" id=1]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/line_thickness = 10.0
+shader_param/sin_frequency = 0.5
+shader_param/sin_offset = 0.0
+shader_param/light_offset = 0.5
