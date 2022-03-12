@@ -54,6 +54,7 @@ anims/RESET = SubResource( 2 )
 anims/walk = SubResource( 3 )
 
 [node name="Stuck" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
 
 [connection signal="timeout" from="Stuck" to="." method="_on_Stuck_timeout"]

@@ -18,7 +18,9 @@ func _draw():
 	if not dragging_box:
 		return
 	var rect = Rect2(box_start, box_end - box_start)
-	draw_rect(rect, Color(1, 0, 0, 0.5))
+	draw_rect(rect, Color(0.25, 1, 0.5, 0.5))
+	draw_rect(rect, Color(1, 1, 1, 0.5), false, 30)
+	draw_rect(rect, Color(0, 0, 0, 0.5), false, 10)
 
 func update_box():
 	box_end =  get_global_mouse_position()
