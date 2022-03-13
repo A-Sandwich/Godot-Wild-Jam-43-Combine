@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var health = 100
+var attack_power = 3
 var target_location = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var speed = 100
@@ -87,6 +88,8 @@ func _on_Stuck_timeout():
 		choose_new_location()
 
 func damage(damageAmount):
+	$HealthBar.visible = true
+	$HealthBar/HealthTimer.start()
 	health -= damageAmount
 	$HealthBar.value = health
 	$Sprite.modulate.r = 1
@@ -94,6 +97,15 @@ func damage(damageAmount):
 	if health <= 0:
 		queue_free()
 
-
 func _on_DamagePlayer_animation_finished(anim_name):
 	pass # Replace with function body.
+
+
+func _on_Vision_body_entered(body):
+	if body.is_in_group("enemy"):
+		var direction = global_position.direction_to(body.global_position) * -1
+		target_location = global_position + (direction * 1000)
+
+
+func _on_HealthTimer_timeout():
+	$HealthBar.visible = false

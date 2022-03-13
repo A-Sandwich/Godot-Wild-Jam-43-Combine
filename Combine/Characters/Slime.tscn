@@ -86,9 +86,10 @@ animations = [ {
 radius = 63.3246
 
 [sub_resource type="CircleShape2D" id=20]
-radius = 141.174
+radius = 166.003
 
-[node name="Slime" type="KinematicBody2D"]
+[node name="Slime" type="KinematicBody2D" groups=["enemy", "slime"]]
+collision_layer = 3
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

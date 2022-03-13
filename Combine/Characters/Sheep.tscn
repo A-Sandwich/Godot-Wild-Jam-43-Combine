@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/sprites/sheep.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Sheep.gd" type="Script" id=2]
@@ -67,6 +67,9 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=6]
+radius = 218.002
+
 [node name="Sheep" type="KinematicBody2D" groups=["Sheep"]]
 script = ExtResource( 2 )
 
@@ -89,10 +92,22 @@ wait_time = 0.1
 one_shot = true
 
 [node name="HealthBar" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="HealthTimer" type="Timer" parent="HealthBar"]
 
 [node name="DamagePlayer" type="AnimationPlayer" parent="."]
 anims/Damage = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
+[node name="Vision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+shape = SubResource( 6 )
+
 [connection signal="timeout" from="Stuck" to="." method="_on_Stuck_timeout"]
+[connection signal="timeout" from="HealthBar/HealthTimer" to="." method="_on_HealthTimer_timeout"]
 [connection signal="animation_finished" from="DamagePlayer" to="." method="_on_DamagePlayer_animation_finished"]
+[connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
