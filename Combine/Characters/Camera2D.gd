@@ -2,7 +2,7 @@ extends Camera2D
 
 
 var margin = 100
-var speed = 2500
+var speed = 1500
 # Lower cap for the `_zoom_level`.
 export var min_zoom := 0.5
 # Upper cap for the `_zoom_level`.

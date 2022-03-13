@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var health = 100
 var target_location = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var speed = 100
@@ -16,6 +17,7 @@ func _ready():
 	target_location = global_position
 	previous_position = global_position
 	offset_animation()
+	$HealthBar.value = health
 
 func connect_signals():
 	var result = get_tree().get_nodes_in_group("Player")
@@ -83,3 +85,15 @@ func is_selected():
 func _on_Stuck_timeout():
 	if stuck_position.distance_to(global_position) < 5:
 		choose_new_location()
+
+func damage(damageAmount):
+	health -= damageAmount
+	$HealthBar.value = health
+	$Sprite.modulate.r = 1
+	$DamagePlayer.play("Damage")
+	if health <= 0:
+		queue_free()
+
+
+func _on_DamagePlayer_animation_finished(anim_name):
+	pass # Replace with function body.

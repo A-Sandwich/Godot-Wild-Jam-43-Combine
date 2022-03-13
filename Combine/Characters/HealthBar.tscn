@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 1, 0.239216, 1 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0, 0, 0, 0.298039 )
+
+[node name="HealthBar" type="ProgressBar"]
+margin_left = -68.0
+margin_top = -98.0
+margin_right = 71.0
+margin_bottom = -84.0
+custom_styles/fg = SubResource( 18 )
+custom_styles/bg = SubResource( 19 )
+value = 50.0
+percent_visible = false
