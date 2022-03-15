@@ -26,7 +26,6 @@ func _process(delta):
 	var size = get_viewport_rect().size
 	var mouse_position = get_viewport().get_mouse_position()
 	if mouse_position.x > size.x or mouse_position.x < 0 or  mouse_position.y > size.y or mouse_position.y < 0:
-		print("Outside")
 		return
 	var direction = Vector2.ZERO
 	if mouse_position.x < margin:

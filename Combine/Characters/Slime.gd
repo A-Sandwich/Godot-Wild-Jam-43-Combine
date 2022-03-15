@@ -48,8 +48,9 @@ func get_target_sheep():
 func _on_AttackArea_body_entered(body):
 	if $AttackTimer.is_stopped():
 		$AttackTimer.start()
-	if "Sheep" in body.name:
+	if body.is_in_group("Sheep"):
 		sheepies[body.name] = body
+		target_sheep = body
 
 func _on_AttackArea_body_exited(body):
 	sheepies.erase(body.name)

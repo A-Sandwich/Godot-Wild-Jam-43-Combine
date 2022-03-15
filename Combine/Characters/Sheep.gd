@@ -93,12 +93,13 @@ func damage(damageAmount):
 	health -= damageAmount
 	$HealthBar.value = health
 	$Sprite.modulate.r = 1
-	$DamagePlayer.play("Damage")
+	$DamagePlayer.play_backwards("Damage")
 	if health <= 0:
 		queue_free()
 
 func _on_DamagePlayer_animation_finished(anim_name):
-	pass # Replace with function body.
+	if not is_being_attacked():
+		$DamagePlayer.stop()
 
 
 func _on_Vision_body_entered(body):
@@ -109,3 +110,6 @@ func _on_Vision_body_entered(body):
 
 func _on_HealthTimer_timeout():
 	$HealthBar.visible = false
+
+func is_being_attacked():
+	return $HealthBar.visible
