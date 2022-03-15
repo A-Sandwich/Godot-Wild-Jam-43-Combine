@@ -2,7 +2,7 @@ extends Node2D
 
 
 var sheepy_boi = load("res://Characters/Sheep.tscn")
-var number_of_sheep = 100
+var number_of_sheep = 0
 var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.

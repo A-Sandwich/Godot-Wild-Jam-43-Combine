@@ -3,7 +3,7 @@ extends KinematicBody2D
 var health = 100
 var attack_power = 10
 var sheepies = {}
-var target_sheep
+var target_entity
 var rng = RandomNumberGenerator.new()
 var speed = 4
 
@@ -22,7 +22,10 @@ func move():
 	if sheepies.keys().size() < 1:
 		if $AnimatedSprite.animation != "idle":
 			$AnimatedSprite.play("idle")
-	moveTowards = get_target_sheep().global_position
+	var target = get_target()
+	if target == null:
+		return
+	moveTowards = target.global_position
 	var direction = global_position.direction_to(moveTowards)
 	var result = move_and_collide(direction * speed)
 
@@ -32,25 +35,46 @@ func attack():
 	$AnimatedSprite.play("move")
 	get_target_sheep().damage(attack_power)
 
+func get_target():
+	if rng.randi_range(1, 10) < 4:
+		get_target_enemy()
+	get_target_sheep()
+	return target_entity
+
+func get_target_enemy():
+	if is_instance_valid(target_entity):
+		return target_entity
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	if enemies.size() < 1:
+		return null
+	var closest_enemy = null
+	for enemy in enemies:
+		if enemy == self:
+			continue
+		if not closest_enemy or global_position.distance_to(enemy.global_position) < global_position.distance_to(closest_enemy.global_position):
+			closest_enemy = enemy
+	target_entity = closest_enemy
+	return closest_enemy
+
 # making this it's own method just because the code is ugly and I want to contain the ugly
 func get_target_sheep():
-	if is_instance_valid(target_sheep):
-		return target_sheep
-	target_sheep = null
-	if sheepies.size() > 0 and (not target_sheep or not target_sheep.name in sheepies.keys()):
-		target_sheep = sheepies[sheepies.keys()[rng.randi_range(0, sheepies.size() - 1)]]
-	if target_sheep == null:
+	if is_instance_valid(target_entity):
+		return target_entity
+	target_entity = null
+	if sheepies.size() > 0 and (not target_entity or not target_entity.name in sheepies.keys()):
+		target_entity = sheepies[sheepies.keys()[rng.randi_range(0, sheepies.size() - 1)]]
+	if target_entity == null:
 		var sheeps = get_tree().get_nodes_in_group("Sheep")
 		if sheeps.size() > 0:
-			target_sheep = sheeps[rng.randi_range(0, sheeps.size() - 1)]
-	return target_sheep
+			target_entity = sheeps[rng.randi_range(0, sheeps.size() - 1)]
+	return target_entity
 
 func _on_AttackArea_body_entered(body):
 	if $AttackTimer.is_stopped():
 		$AttackTimer.start()
 	if body.is_in_group("Sheep"):
 		sheepies[body.name] = body
-		target_sheep = body
+		target_entity = body
 
 func _on_AttackArea_body_exited(body):
 	sheepies.erase(body.name)
