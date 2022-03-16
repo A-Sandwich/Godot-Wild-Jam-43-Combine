@@ -14,6 +14,10 @@ config/name="Combine"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalState="*res://GlobalState.tscn"
+
 [input]
 
 left_click={

@@ -75,6 +75,13 @@ func _on_AttackArea_body_entered(body):
 	if body.is_in_group("Sheep"):
 		sheepies[body.name] = body
 		target_entity = body
+	elif body.is_in_group("enemy") and body.get_index() < get_index():
+		merge(body)
+
+func merge(enemy_to_merge):
+	$"/root/GlobalState".spawn_enemy(global_position, scale.x + 1, health + enemy_to_merge.health)
+	enemy_to_merge.queue_free()
+	queue_free()
 
 func _on_AttackArea_body_exited(body):
 	sheepies.erase(body.name)
