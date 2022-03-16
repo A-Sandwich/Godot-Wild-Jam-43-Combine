@@ -70,6 +70,9 @@ func choose_new_location():
 func highlight():
 	$Sprite.material = outline_shader
 
+func unhighlight():
+	$Sprite.material = null
+
 func _on_left_click():
 	$Sprite.material = null
 

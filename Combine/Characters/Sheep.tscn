@@ -70,7 +70,7 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=6]
 radius = 218.002
 
-[node name="Sheep" type="KinematicBody2D" groups=["Sheep"]]
+[node name="Sheep" type="KinematicBody2D" groups=["Sheep", "sheep"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

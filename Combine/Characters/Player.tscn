@@ -21,3 +21,4 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="Selector" to="." method="_on_Selector_body_entered"]
+[connection signal="body_exited" from="Selector" to="." method="_on_Selector_body_exited"]

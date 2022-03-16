@@ -45,3 +45,9 @@ func _on_Selector_body_entered(body):
 		return
 	if "Sheep" in body.name:
 		body.highlight()
+		
+func _on_Selector_body_exited(body):
+	if not dragging_box:
+		return
+	if body.is_in_group("sheep"):
+		body.unhighlight()
