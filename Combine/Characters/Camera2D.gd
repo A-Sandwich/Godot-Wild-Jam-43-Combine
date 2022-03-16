@@ -15,6 +15,7 @@ export var zoom_duration := 0.2
 var _zoom_level := 5.0 setget _set_zoom_level
 # We store a reference to the scene's tween node.
 onready var tween: Tween = $Tween
+var can_move = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +24,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if can_move:
+		move(delta)
+
+func move(delta : float):
 	var size = get_viewport_rect().size
 	var mouse_position = get_viewport().get_mouse_position()
 	if mouse_position.x > size.x or mouse_position.x < 0 or  mouse_position.y > size.y or mouse_position.y < 0:
@@ -38,7 +43,7 @@ func _process(delta):
 		direction.y = 1
 	
 	position  += direction * speed  * delta
-
+	
 func _unhandled_input(event):
 	if event.is_action_pressed("scroll_up"):
 		_set_zoom_level(_zoom_level - zoom_factor)
@@ -62,3 +67,12 @@ func _set_zoom_level(value: float) -> void:
 		tween.EASE_OUT
 	)
 	tween.start()
+
+
+
+func _notification(notification):
+	match notification:
+		NOTIFICATION_WM_MOUSE_EXIT:
+			can_move = false
+		NOTIFICATION_WM_MOUSE_ENTER:
+			can_move = true
