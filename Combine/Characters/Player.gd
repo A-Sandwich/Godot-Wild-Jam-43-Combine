@@ -7,7 +7,6 @@ signal left_click
 signal right_click
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input()
 	if dragging_box:
