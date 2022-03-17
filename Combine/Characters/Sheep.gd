@@ -9,6 +9,8 @@ var previous_position = Vector2.ZERO
 var jitter = Vector2.ZERO
 var outline_shader = load("res://Characters/outline_shader.tres")
 var stuck_position = Vector2.ZERO
+const INT_MAX = 9223372036854775807
+var selection_id = INT_MAX
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +29,7 @@ func connect_signals():
 	
 	result[0].connect("left_click", self, "_on_left_click")
 	result[0].connect("right_click", self, "_on_right_click")
+	
 
 func offset_animation():
 	var timer_length = rng.randf_range(0.0, 0.75)
@@ -73,8 +76,9 @@ func highlight():
 func unhighlight():
 	$Sprite.material = null
 
-func _on_left_click():
+func _on_left_click(selection_id):
 	$Sprite.material = null
+	self.selection_id = selection_id
 
 func _on_right_click(new_position):
 	if not is_selected():
@@ -104,12 +108,10 @@ func _on_DamagePlayer_animation_finished(anim_name):
 	if not is_being_attacked():
 		$DamagePlayer.stop()
 
-
 func _on_Vision_body_entered(body):
 	if body.is_in_group("enemy"):
 		var direction = global_position.direction_to(body.global_position) * -1
 		target_location = global_position + (direction * 1000)
-
 
 func _on_HealthTimer_timeout():
 	$HealthBar.visible = false

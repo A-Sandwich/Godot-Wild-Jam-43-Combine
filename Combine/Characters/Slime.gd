@@ -6,6 +6,7 @@ var sheepies = {}
 var target_entity
 var rng = RandomNumberGenerator.new()
 var speed = 4
+signal enemy_clicked
 
 
 func _ready():
@@ -92,3 +93,7 @@ func _on_AttackTimer_timeout():
 	if sheepies.keys().size() < 1:
 		return
 	attack()
+
+func _on_ClickArea_input_event(viewport, event, shape_idx):
+	if event.is_action("right_click"):
+		emit_signal("enemy_clicked", self)

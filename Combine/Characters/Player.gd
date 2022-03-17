@@ -2,6 +2,7 @@ extends Node2D
 
 var box_start = Vector2.ZERO
 var box_end = Vector2.ZERO
+var selection_id = -9223372036854775807
 var dragging_box = false
 signal left_click
 signal right_click
@@ -28,8 +29,9 @@ func update_box():
 
 func get_input():
 	if Input.is_action_just_pressed("left_click"):
+		selection_id += 1
 		dragging_box = true
-		emit_signal("left_click")
+		emit_signal("left_click", selection_id)
 		box_start = get_global_mouse_position()
 		box_end = get_global_mouse_position()
 	if Input.is_action_just_released("left_click"):
