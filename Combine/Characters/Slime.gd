@@ -92,7 +92,10 @@ func _on_AttackArea_body_exited(body):
 func _on_AttackTimer_timeout():
 	if sheepies.keys().size() < 1:
 		return
-	attack()
+	if target_entity and is_instance_valid(target_entity):
+		attack()
+	else:
+		target_entity = null
 
 func _on_ClickArea_input_event(viewport, event, shape_idx):
 	if event.is_action("right_click"):

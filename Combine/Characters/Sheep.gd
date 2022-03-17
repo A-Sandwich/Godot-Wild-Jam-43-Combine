@@ -11,6 +11,7 @@ var outline_shader = load("res://Characters/outline_shader.tres")
 var stuck_position = Vector2.ZERO
 const INT_MAX = 9223372036854775807
 var selection_id = INT_MAX
+var target_enemy = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +31,9 @@ func connect_signals():
 	result[0].connect("left_click", self, "_on_left_click")
 	result[0].connect("right_click", self, "_on_right_click")
 	
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemies:
+		enemy.connect("enemy_clicked", self, "_on_enemy_clicked")
 
 func offset_animation():
 	var timer_length = rng.randf_range(0.0, 0.75)
@@ -45,6 +49,8 @@ func _process(delta):
 	update_jitter()
 
 func get_velocity():
+	if target_enemy and is_instance_valid(target_enemy):
+		target_location = target_enemy.global_position
 	var direction = global_position.direction_to(target_location)
 	update_sprite(direction)
 	var velocity = (direction + jitter) * speed
@@ -118,3 +124,7 @@ func _on_HealthTimer_timeout():
 
 func is_being_attacked():
 	return $HealthBar.visible
+
+func _on_enemy_clicked(enemy : KinematicBody2D):
+	if is_selected():
+		target_enemy = enemy
