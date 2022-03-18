@@ -107,7 +107,11 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
 shape = SubResource( 6 )
 
+[node name="AttackTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Stuck" to="." method="_on_Stuck_timeout"]
 [connection signal="timeout" from="HealthBar/HealthTimer" to="." method="_on_HealthTimer_timeout"]
 [connection signal="animation_finished" from="DamagePlayer" to="." method="_on_DamagePlayer_animation_finished"]
 [connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
+[connection signal="body_exited" from="Vision" to="." method="_on_Vision_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

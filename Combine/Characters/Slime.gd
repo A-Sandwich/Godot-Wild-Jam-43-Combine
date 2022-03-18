@@ -100,3 +100,12 @@ func _on_AttackTimer_timeout():
 func _on_ClickArea_input_event(viewport, event, shape_idx):
 	if event.is_action("right_click"):
 		emit_signal("enemy_clicked", self)
+
+func damage(damageAmount):
+	$HealthBar.visible = true
+	health -= damageAmount
+	$HealthBar.value = health
+	$AnimatedSprite.modulate.r = 1
+	#$DamagePlayer.play_backwards("Damage")
+	if health <= 0:
+		queue_free()

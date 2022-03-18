@@ -12,6 +12,7 @@ var stuck_position = Vector2.ZERO
 const INT_MAX = 9223372036854775807
 var selection_id = INT_MAX
 var target_enemy = null
+var target_in_range = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -116,8 +117,16 @@ func _on_DamagePlayer_animation_finished(anim_name):
 
 func _on_Vision_body_entered(body):
 	if body.is_in_group("enemy"):
-		var direction = global_position.direction_to(body.global_position) * -1
-		target_location = global_position + (direction * 1000)
+		if target_enemy and is_instance_valid(target_enemy) and target_enemy == body:
+			attack()
+			target_in_range = true
+			$AttackTimer.start()
+		elif not target_enemy or not is_instance_valid(target_enemy):
+			var direction = global_position.direction_to(body.global_position) * -1
+			target_location = global_position + (direction * 1000)
+
+func attack():
+	target_enemy.damage(attack_power)
 
 func _on_HealthTimer_timeout():
 	$HealthBar.visible = false
@@ -128,3 +137,13 @@ func is_being_attacked():
 func _on_enemy_clicked(enemy : KinematicBody2D):
 	if is_selected():
 		target_enemy = enemy
+
+func _on_AttackTimer_timeout():
+	if target_in_range:
+		attack()
+	else:
+		$AttackTimer.stop()
+
+func _on_Vision_body_exited(body):
+	if body.is_in_group("enemy") and target_enemy and is_instance_valid(target_enemy) and body == target_enemy:
+		target_in_range = false
