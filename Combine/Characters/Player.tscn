@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Player.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Typefaces/DotGothic16-Regular.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 99
+font_data = ExtResource( 3 )
 
 [node name="Player" type="Node2D" groups=["Player"]]
 script = ExtResource( 1 )
@@ -20,5 +25,18 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
 shape = SubResource( 1 )
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="HUD"]
+margin_left = 16.0
+margin_top = 418.0
+margin_right = 627.0
+margin_bottom = 575.0
+custom_fonts/font = SubResource( 2 )
+text = "Merge Sheep"
+
 [connection signal="body_entered" from="Selector" to="." method="_on_Selector_body_entered"]
 [connection signal="body_exited" from="Selector" to="." method="_on_Selector_body_exited"]
+[connection signal="mouse_entered" from="HUD/Button" to="." method="_on_Button_mouse_entered"]
+[connection signal="mouse_exited" from="HUD/Button" to="." method="_on_Button_mouse_exited"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_Button_pressed"]

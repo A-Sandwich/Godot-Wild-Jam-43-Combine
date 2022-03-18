@@ -6,6 +6,10 @@ var selection_id = -9223372036854775807
 var dragging_box = false
 signal left_click
 signal right_click
+signal merge_sheep
+signal go_to_sheep
+var selection = {}
+var is_merging_sheep = false
 
 
 func _process(delta):
@@ -13,6 +17,10 @@ func _process(delta):
 	if dragging_box:
 		update_box()
 	update()
+	if selection.keys().size() < 1:
+		$HUD/Button.visible = false
+	else:
+		$HUD/Button.visible = true
 
 func _draw():
 	if not dragging_box:
@@ -28,7 +36,7 @@ func update_box():
 	$Selector.global_position = box_start + ($Selector/CollisionShape2D.shape.extents)
 
 func get_input():
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click") and not is_merging_sheep:
 		selection_id += 1
 		dragging_box = true
 		emit_signal("left_click", selection_id)
@@ -46,10 +54,44 @@ func _on_Selector_body_entered(body):
 	if not dragging_box:
 		return
 	if "Sheep" in body.name:
+		selection[body.get_instance_id()] = body
 		body.highlight()
 		
 func _on_Selector_body_exited(body):
 	if not dragging_box:
 		return
 	if body.is_in_group("sheep"):
+		print("Deselecting", body.get_instance_id())
 		body.unhighlight()
+		selection.erase(body.get_instance_id())
+
+func _on_Button_pressed():
+	var centroid = get_sheep_centroid()
+	selection.clear()
+	emit_signal("merge_sheep", centroid)
+	is_merging_sheep = false
+
+func get_sheep_centroid():
+	var valid_sheep = 0
+	var x_sum = 0
+	var y_sum = 0
+	for key in selection.keys():
+		var sheep = selection[key]
+		if is_instance_valid(sheep):
+			valid_sheep += 1
+			x_sum += sheep.global_position.x
+			y_sum += sheep.global_position.y
+	if valid_sheep < 1:
+		return Vector2.ZERO
+	var centroid_x = (1.0/valid_sheep) * x_sum
+	var centroid_y = (1.0/valid_sheep) * y_sum
+	return Vector2(centroid_x, centroid_y)
+	
+
+
+func _on_Button_mouse_entered():
+	is_merging_sheep = true
+
+
+func _on_Button_mouse_exited():
+	is_merging_sheep = false

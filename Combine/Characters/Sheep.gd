@@ -13,6 +13,9 @@ const INT_MAX = 9223372036854775807
 var selection_id = INT_MAX
 var target_enemy = null
 var target_in_range = false
+var merge_point = null
+var merge_sheep = null
+signal merge_to_sheep
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +34,9 @@ func connect_signals():
 	
 	result[0].connect("left_click", self, "_on_left_click")
 	result[0].connect("right_click", self, "_on_right_click")
+	result[0].connect("merge_sheep", self, "_on_merge_sheep")
+	result[0].connect("go_to_sheep", self, "_on_go_to_sheep")
+	self.connect("merge_to_sheep", result[0], "_on_merge_to_sheep")
 	
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
@@ -50,6 +56,8 @@ func _process(delta):
 	update_jitter()
 
 func get_velocity():
+	if is_merging():
+		return get_merge_point()
 	if target_enemy and is_instance_valid(target_enemy):
 		target_location = target_enemy.global_position
 	var direction = global_position.direction_to(target_location)
@@ -147,3 +155,28 @@ func _on_AttackTimer_timeout():
 func _on_Vision_body_exited(body):
 	if body.is_in_group("enemy") and target_enemy and is_instance_valid(target_enemy) and body == target_enemy:
 		target_in_range = false
+
+func _on_merge_sheep(centroid : Vector2):
+	if is_selected():
+		merge_point = centroid
+		$Sprite.material = null
+
+func is_merging():
+	return  merge_point != null or merge_sheep != null
+
+func get_merge_point():
+	if merge_point != null and global_position.distance_to(merge_point) < 10:
+		merge_point = null
+		merge_sheep = self
+		$Merge.set_collision_mask_bit(1, true)
+		#emit_signal("merge_to_sheep", self)
+	return merge_point if merge_sheep == null else merge_sheep.global_position
+
+func _on_go_to_sheep(sheep):
+	if is_merging() and sheep.selection_id == selection_id:
+		merge_sheep = sheep
+
+
+func _on_Merge_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if body != self and body.is_in_group("Sheep"):
+		body.queue_free() # later I will figure out making consuming sheep bigger

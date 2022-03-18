@@ -106,6 +106,10 @@ func damage(damageAmount):
 	health -= damageAmount
 	$HealthBar.value = health
 	$AnimatedSprite.modulate.r = 1
-	#$DamagePlayer.play_backwards("Damage")
+	$DamageAnimation.play_backwards("Damage")
 	if health <= 0:
 		queue_free()
+
+
+func _on_DamageAnimation_animation_finished(anim_name):
+	$DamageAnimation.stop()
