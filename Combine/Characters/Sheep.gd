@@ -15,6 +15,7 @@ var target_enemy = null
 var target_in_range = false
 var merge_point = null
 var merge_sheep = null
+var bounds = Vector2.ZERO
 signal merge_to_sheep
 
 # Called when the node enters the scene tree for the first time.
@@ -53,10 +54,13 @@ func offset_animation():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	previous_position = global_position
-	if target_location.distance_to(global_position) <= 10:
+	if target_location.distance_to(global_position) <= 10 or is_position_invalid():
 		choose_new_location()
 	move_and_slide(get_velocity())
 	update_jitter()
+
+func is_position_invalid(position_to_check = global_position):
+	return position_to_check.x < bounds.x or position_to_check.x > bounds.y or position_to_check.y < bounds.x or position_to_check.y > bounds.y
 
 func get_velocity():
 	if is_merging():
@@ -87,6 +91,8 @@ func choose_new_location():
 	var range_change_x = rng.randi_range(-500, 500)
 	var range_change_y = rng.randi_range(-500, 500)
 	target_location = Vector2(global_position.x + range_change_x, global_position.y + range_change_y)
+	if is_position_invalid(target_location):
+		choose_new_location()
 	jitter = Vector2.ZERO
 
 func highlight():

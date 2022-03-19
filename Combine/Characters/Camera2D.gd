@@ -1,5 +1,6 @@
 extends Camera2D
 
+var bounds = Vector2.ZERO
 
 var margin = 100
 var speed = 1500
@@ -42,7 +43,13 @@ func move(delta : float):
 	if mouse_position.y  > (size.y - margin):
 		direction.y = 1
 	
-	position  += direction * speed  * delta
+	clamp_position(position, direction * speed  * delta)
+	
+func clamp_position(position : Vector2, velocity : Vector2):
+	var potential_position = position + velocity
+	var x = clamp(potential_position.x, (bounds.x - get_viewport().size.x / 2), (abs(bounds.x) + get_viewport().size.x / 2))
+	var y = clamp(potential_position.y, (-bounds.y / 2) + 50, (bounds.y / 2) - 50)
+	self.position = Vector2(x, y)
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("scroll_up"):
@@ -69,10 +76,12 @@ func _set_zoom_level(value: float) -> void:
 	tween.start()
 
 
-
 func _notification(notification):
 	match notification:
 		NOTIFICATION_WM_MOUSE_EXIT:
 			can_move = false
 		NOTIFICATION_WM_MOUSE_ENTER:
 			can_move = true
+
+func set_bounds(bounds : Vector2):
+	self.bounds = bounds

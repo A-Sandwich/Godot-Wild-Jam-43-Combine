@@ -6,6 +6,7 @@ var sheepies = {}
 var target_entity
 var rng = RandomNumberGenerator.new()
 var speed = 4
+var bounds = Vector2.ZERO
 signal enemy_clicked
 
 

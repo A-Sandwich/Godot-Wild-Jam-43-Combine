@@ -10,9 +10,9 @@ config_version=4
 
 [application]
 
-config/name="Combine"
-run/main_scene="res://World.tscn"
-config/icon="res://icon.png"
+config/name="Shepard"
+run/main_scene="res://Levels/Level00.tscn"
+config/icon="res://Assets/sprites/sheep.png"
 
 [autoload]
 
