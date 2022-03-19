@@ -10,6 +10,7 @@ signal merge_sheep
 signal go_to_sheep
 var selection = {}
 var is_merging_sheep = false
+var used_selection_ids = {}
 
 
 func _process(delta):
@@ -95,3 +96,10 @@ func _on_Button_mouse_entered():
 
 func _on_Button_mouse_exited():
 	is_merging_sheep = false
+
+func _on_merge_to_sheep(sheep):
+	if sheep.selection_id in used_selection_ids.keys():
+		sheep._on_go_to_sheep(sheep)
+	else:
+		used_selection_ids[sheep.selection_id] = sheep
+		emit_signal("go_to_sheep", sheep)

@@ -57,7 +57,8 @@ func _process(delta):
 
 func get_velocity():
 	if is_merging():
-		return get_merge_point()
+		var direction = global_position.direction_to(get_merge_point())
+		return (direction + jitter) * speed
 	if target_enemy and is_instance_valid(target_enemy):
 		target_location = target_enemy.global_position
 	var direction = global_position.direction_to(target_location)
@@ -158,6 +159,9 @@ func _on_Vision_body_exited(body):
 
 func _on_merge_sheep(centroid : Vector2):
 	if is_selected():
+		merge_sheep = null
+		$MergeAnimation.stop()
+		$Merge.set_collision_mask_bit(0, false)
 		merge_point = centroid
 		$Sprite.material = null
 
@@ -165,11 +169,12 @@ func is_merging():
 	return  merge_point != null or merge_sheep != null
 
 func get_merge_point():
-	if merge_point != null and global_position.distance_to(merge_point) < 10:
+	if merge_point != null and global_position.distance_to(merge_point) < 100:
 		merge_point = null
 		merge_sheep = self
-		$Merge.set_collision_mask_bit(1, true)
-		#emit_signal("merge_to_sheep", self)
+		$Merge.set_collision_mask_bit(0, true)
+		emit_signal("merge_to_sheep", self)
+		$MergeAnimation.play("Merge")
 	return merge_point if merge_sheep == null else merge_sheep.global_position
 
 func _on_go_to_sheep(sheep):
@@ -178,5 +183,5 @@ func _on_go_to_sheep(sheep):
 
 
 func _on_Merge_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if body != self and body.is_in_group("Sheep"):
+	if body != self and body.is_in_group("Sheep") and body.selection_id == selection_id:
 		body.queue_free() # later I will figure out making consuming sheep bigger
