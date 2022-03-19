@@ -60,7 +60,8 @@ func _process(delta):
 	update_jitter()
 
 func is_position_invalid(position_to_check = global_position):
-	return position_to_check.x < bounds.x or position_to_check.x > bounds.y or position_to_check.y < bounds.x or position_to_check.y > bounds.y
+	return false
+	#return position_to_check.x < bounds.x or position_to_check.x > bounds.y or position_to_check.y < bounds.x or position_to_check.y > bounds.y
 
 func get_velocity():
 	if is_merging():

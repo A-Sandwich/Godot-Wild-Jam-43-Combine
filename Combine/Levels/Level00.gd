@@ -2,10 +2,17 @@ extends Node2D
 
 
 var number_of_sheep = 3
-const BOUNDS = Vector2(-1000, 1000)
+var bounds = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$"/root/GlobalState".set_bounds(BOUNDS)
+	bounds = get_bounds()
+	$"/root/GlobalState".set_bounds(bounds)
 	$"/root/GlobalState".spawn_sheepy_bois(number_of_sheep)
-	$Player.set_bounds(BOUNDS)
+	$Player.set_bounds(bounds)
+
+func get_bounds():
+	return {
+		"topLeft" : $Bounds/TopLeft.transform.get_origin(),
+		"bottomRight" : $Bounds/BottomRight.transform.get_origin()
+	}

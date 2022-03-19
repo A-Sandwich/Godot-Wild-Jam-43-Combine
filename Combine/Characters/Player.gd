@@ -11,7 +11,7 @@ signal go_to_sheep
 var selection = {}
 var is_merging_sheep = false
 var used_selection_ids = {}
-var bounds = Vector2.ZERO
+var bounds = {}
 
 func _ready():
 	$"/root/GlobalState".connect("go_to_sheep", self, "_on_go_to_sheep")
@@ -27,9 +27,10 @@ func _process(delta):
 		$HUD/Button.visible = true
 
 func _draw():
-	var bounds_rect = Rect2(bounds.x, bounds.x, abs(bounds.x) + bounds.y, abs(bounds.x) + bounds.y)
-	draw_rect(bounds_rect, Color(1, 1, 1, 0.5), false, 30)
-	draw_rect(bounds_rect, Color(0, 0, 0, 0.5), false, 10)
+	if get_tree().debug_collisions_hint:
+		var bounds_rect = Rect2(bounds["topLeft"].x, bounds["topLeft"].y, abs(bounds["topLeft"].x) + bounds["bottomRight"].x, abs(bounds["topLeft"].y) + bounds["bottomRight"].y)
+		draw_rect(bounds_rect, Color(1, 0, 0, 0.5), false, 30)
+		draw_rect(bounds_rect, Color(1, 0, 0, 0.5), false, 10)
 
 	if not dragging_box:
 		return
@@ -113,6 +114,6 @@ func _on_merge_to_sheep(sheep):
 func _on_go_to_sheep(sheep):
 	used_selection_ids[sheep.selection_id] = sheep
 
-func set_bounds(bounds : Vector2):
+func set_bounds(bounds):
 	self.bounds = bounds
 	$Camera2D.set_bounds(bounds)
