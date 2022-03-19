@@ -71,7 +71,7 @@ tracks/0/keys = {
 radius = 218.002
 
 [sub_resource type="CircleShape2D" id=7]
-radius = 118.423
+radius = 26.1725
 
 [sub_resource type="Animation" id=8]
 resource_name = "Merge"

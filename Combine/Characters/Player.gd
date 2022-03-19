@@ -42,7 +42,7 @@ func get_input():
 	if Input.is_action_just_pressed("left_click") and not is_merging_sheep:
 		selection_id += 1
 		dragging_box = true
-		emit_signal("left_click", selection_id)
+		emit_signal("left_click")
 		box_start = get_global_mouse_position()
 		box_end = get_global_mouse_position()
 	if Input.is_action_just_released("left_click"):
@@ -59,7 +59,6 @@ func _on_Selector_body_entered(body):
 	if "Sheep" in body.name:
 		selection[body.get_instance_id()] = body
 		body.highlight()
-		body.selection_id = selection_id
 		
 func _on_Selector_body_exited(body):
 	if not dragging_box:
@@ -69,9 +68,10 @@ func _on_Selector_body_exited(body):
 		selection.erase(body.get_instance_id())
 
 func _on_Button_pressed():
+	selection_id += 1
 	var centroid = get_sheep_centroid()
 	selection.clear()
-	emit_signal("merge_sheep", centroid)
+	emit_signal("merge_sheep", centroid, selection_id)
 	is_merging_sheep = false
 
 func get_sheep_centroid():
@@ -89,7 +89,6 @@ func get_sheep_centroid():
 	var centroid_x = (1.0/valid_sheep) * x_sum
 	var centroid_y = (1.0/valid_sheep) * y_sum
 	return Vector2(centroid_x, centroid_y)
-	
 
 
 func _on_Button_mouse_entered():

@@ -46,7 +46,9 @@ func connect_signals():
 func offset_animation():
 	var timer_length = rng.randf_range(0.0, 0.75)
 	yield(get_tree().create_timer(timer_length), "timeout")
-	$AnimationPlayer.play("walk")
+	# sometimes between yield and resume the sheep is disposed
+	if is_instance_valid($AnimationPlayer):
+		$AnimationPlayer.play("walk")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -93,7 +95,7 @@ func highlight():
 func unhighlight():
 	$Sprite.material = null
 
-func _on_left_click(selection_id):
+func _on_left_click():
 	$Sprite.material = null
 
 func _on_right_click(new_position):
@@ -157,13 +159,14 @@ func _on_Vision_body_exited(body):
 	if body.is_in_group("enemy") and target_enemy and is_instance_valid(target_enemy) and body == target_enemy:
 		target_in_range = false
 
-func _on_merge_sheep(centroid : Vector2):
+func _on_merge_sheep(centroid : Vector2, selection_id):
 	if is_selected():
 		merge_sheep = null
 		$MergeAnimation.stop()
 		unsetMergeMask()
 		merge_point = centroid
 		$Sprite.material = null
+		self.selection_id = selection_id
 
 func unsetMergeMask():
 	$Merge.set_collision_mask_bit(0, false)
