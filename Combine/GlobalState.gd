@@ -27,14 +27,18 @@ func spawn_enemy(enemy_global_position, scale, health):
 	get_tree().get_root().call_deferred("add_child", new_enemy)
 
 func merge_sheep(winning_sheep, losing_sheep):
+	print(winning_sheep.get_instance_id(), ",", losing_sheep.get_instance_id())
 	var sheep = sheepy_boi.instance()
-	var scale = winning_sheep.scale + losing_sheep.scale
+	var scale = winning_sheep.scale  + losing_sheep.scale
 	sheep.scale = scale
 	sheep.global_position = winning_sheep.global_position
 	sheep.health = winning_sheep.health + losing_sheep.health
-	sheep.call_deferred("becomeMergeSheep", winning_sheep.selection_id)
-	emit_signal("go_to_sheep", sheep)
-	sheep.unsetMergeMask()
+	sheep.selection_id = winning_sheep.selection_id
+	winning_sheep.unsetMergeMask()
+	winning_sheep.global_position = Vector2(-1000000000, 10000000000)
+	losing_sheep.global_position = Vector2(1000000000, 10000000000)
 	winning_sheep.queue_free()
 	losing_sheep.queue_free()
 	get_tree().get_root().call_deferred("add_child", sheep)
+	sheep.call_deferred("becomeMergeSheep")
+	emit_signal("go_to_sheep", sheep)

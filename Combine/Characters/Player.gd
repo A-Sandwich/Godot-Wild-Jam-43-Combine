@@ -59,6 +59,7 @@ func _on_Selector_body_entered(body):
 	if "Sheep" in body.name:
 		selection[body.get_instance_id()] = body
 		body.highlight()
+		body.selection_id = selection_id
 		
 func _on_Selector_body_exited(body):
 	if not dragging_box:

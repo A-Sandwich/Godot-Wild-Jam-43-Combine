@@ -95,7 +95,6 @@ func unhighlight():
 
 func _on_left_click(selection_id):
 	$Sprite.material = null
-	self.selection_id = selection_id
 
 func _on_right_click(new_position):
 	if not is_selected():
@@ -184,10 +183,11 @@ func _on_go_to_sheep(sheep):
 
 func _on_Merge_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body != self and body.is_in_group("Sheep") and body.selection_id == selection_id and self == merge_sheep:
+		print("Position of merge sheep: ", global_position, ", ", selection_id)
+		print("Position of merge target: ", body.global_position, ", ", body.selection_id)
 		$"/root/GlobalState".merge_sheep(self, body)
 
-func becomeMergeSheep(selection = selection_id):
-	selection_id = selection
+func becomeMergeSheep():
 	merge_point = null
 	merge_sheep = self
 	$Merge.set_collision_mask_bit(0, true)
