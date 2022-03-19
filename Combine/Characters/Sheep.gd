@@ -186,8 +186,6 @@ func _on_go_to_sheep(sheep):
 
 func _on_Merge_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body != self and body.is_in_group("Sheep") and body.selection_id == selection_id and self == merge_sheep:
-		print("Position of merge sheep: ", global_position, ", ", selection_id)
-		print("Position of merge target: ", body.global_position, ", ", body.selection_id)
 		$"/root/GlobalState".merge_sheep(self, body)
 
 func becomeMergeSheep():

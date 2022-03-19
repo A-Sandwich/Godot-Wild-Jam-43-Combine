@@ -27,7 +27,6 @@ func spawn_enemy(enemy_global_position, scale, health):
 	get_tree().get_root().call_deferred("add_child", new_enemy)
 
 func merge_sheep(winning_sheep, losing_sheep):
-	print(winning_sheep.get_instance_id(), ",", losing_sheep.get_instance_id())
 	var sheep = sheepy_boi.instance()
 	var scale = winning_sheep.scale  + losing_sheep.scale
 	sheep.scale = scale
