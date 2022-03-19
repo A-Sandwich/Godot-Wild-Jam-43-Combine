@@ -60,7 +60,7 @@ func clamp_vector(position : Vector2, bounds : Vector2):
 	return Vector2(x, y)
 
 func _on_game_over():
-	emit_signal("game_over", points_per_sheep * sheep_saved)
+	emit_signal("game_over", points_per_sheep * sheep_saved, sheep_saved, sheep_destroyed, slimes_removed)
 
 func sheep_saved(sheep_name):
 	sheep_saved += 1

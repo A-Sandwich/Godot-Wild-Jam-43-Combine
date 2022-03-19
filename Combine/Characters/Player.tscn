@@ -46,15 +46,81 @@ visible = false
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -8.0
-margin_bottom = 4.0
+margin_top = -216.0
+margin_bottom = 216.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
+[node name="SheepSavedBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
 margin_right = 1024.0
 margin_bottom = 105.0
 alignment = 1
 
-[node name="PointsLabel" type="Label" parent="Scoreboard/VBoxContainer/HBoxContainer"]
+[node name="SheepSavedLabel" type="Label" parent="Scoreboard/VBoxContainer/SheepSavedBox"]
+margin_left = 276.0
+margin_right = 708.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 5 )
+text = "Sheep Saved:"
+align = 2
+valign = 1
+
+[node name="SheepSaved" type="Label" parent="Scoreboard/VBoxContainer/SheepSavedBox"]
+margin_left = 712.0
+margin_right = 748.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+
+[node name="SheepLostBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
+margin_top = 109.0
+margin_right = 1024.0
+margin_bottom = 214.0
+alignment = 1
+
+[node name="SheepLostLabel" type="Label" parent="Scoreboard/VBoxContainer/SheepLostBox"]
+margin_left = 294.0
+margin_right = 689.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 5 )
+text = "Sheep Lost:"
+align = 2
+valign = 1
+
+[node name="SheepLost" type="Label" parent="Scoreboard/VBoxContainer/SheepLostBox"]
+margin_left = 693.0
+margin_right = 729.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+
+[node name="SlimesDestroyedBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
+margin_top = 218.0
+margin_right = 1024.0
+margin_bottom = 323.0
+alignment = 1
+
+[node name="SlimesDestroyedLabel" type="Label" parent="Scoreboard/VBoxContainer/SlimesDestroyedBox"]
+margin_left = 168.0
+margin_right = 815.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 5 )
+text = "Slimes Destroyed:"
+align = 2
+valign = 1
+
+[node name="SlimesDestroyed" type="Label" parent="Scoreboard/VBoxContainer/SlimesDestroyedBox"]
+margin_left = 819.0
+margin_right = 855.0
+margin_bottom = 105.0
+custom_fonts/font = ExtResource( 5 )
+text = "0"
+
+[node name="PointsBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
+margin_top = 327.0
+margin_right = 1024.0
+margin_bottom = 432.0
+alignment = 1
+
+[node name="PointsLabel" type="Label" parent="Scoreboard/VBoxContainer/PointsBox"]
 margin_left = 366.0
 margin_right = 617.0
 margin_bottom = 105.0
@@ -63,7 +129,7 @@ text = "Points:"
 align = 2
 valign = 1
 
-[node name="Points" type="Label" parent="Scoreboard/VBoxContainer/HBoxContainer"]
+[node name="Points" type="Label" parent="Scoreboard/VBoxContainer/PointsBox"]
 margin_left = 621.0
 margin_right = 657.0
 margin_bottom = 105.0
