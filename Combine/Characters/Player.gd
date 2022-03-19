@@ -12,6 +12,8 @@ var selection = {}
 var is_merging_sheep = false
 var used_selection_ids = {}
 
+func _ready():
+	$"/root/GlobalState".connect("go_to_sheep", self, "_on_go_to_sheep")
 
 func _process(delta):
 	get_input()
@@ -62,7 +64,6 @@ func _on_Selector_body_exited(body):
 	if not dragging_box:
 		return
 	if body.is_in_group("sheep"):
-		print("Deselecting", body.get_instance_id())
 		body.unhighlight()
 		selection.erase(body.get_instance_id())
 
@@ -103,3 +104,6 @@ func _on_merge_to_sheep(sheep):
 	else:
 		used_selection_ids[sheep.selection_id] = sheep
 		emit_signal("go_to_sheep", sheep)
+
+func _on_go_to_sheep(sheep):
+	used_selection_ids[sheep.selection_id] = sheep

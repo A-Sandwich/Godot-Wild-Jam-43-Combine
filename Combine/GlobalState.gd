@@ -3,6 +3,7 @@ extends Node
 var sheepy_boi = load("res://Characters/Sheep.tscn")
 var slime = load("res://Characters/Slime.tscn")
 var rng = RandomNumberGenerator.new()
+signal go_to_sheep
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,3 +25,16 @@ func spawn_enemy(enemy_global_position, scale, health):
 	new_enemy.attack_power = new_enemy.attack_power + 15 * scale
 	new_enemy.health = health
 	get_tree().get_root().call_deferred("add_child", new_enemy)
+
+func merge_sheep(winning_sheep, losing_sheep):
+	var sheep = sheepy_boi.instance()
+	var scale = winning_sheep.scale + losing_sheep.scale
+	sheep.scale = scale
+	sheep.global_position = winning_sheep.global_position
+	sheep.health = winning_sheep.health + losing_sheep.health
+	sheep.call_deferred("becomeMergeSheep", winning_sheep.selection_id)
+	emit_signal("go_to_sheep", sheep)
+	sheep.unsetMergeMask()
+	winning_sheep.queue_free()
+	losing_sheep.queue_free()
+	get_tree().get_root().call_deferred("add_child", sheep)

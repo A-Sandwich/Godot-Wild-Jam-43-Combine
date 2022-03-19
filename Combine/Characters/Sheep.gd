@@ -36,6 +36,7 @@ func connect_signals():
 	result[0].connect("right_click", self, "_on_right_click")
 	result[0].connect("merge_sheep", self, "_on_merge_sheep")
 	result[0].connect("go_to_sheep", self, "_on_go_to_sheep")
+	$"/root/GlobalState".connect("go_to_sheep", self, "_on_go_to_sheep")
 	self.connect("merge_to_sheep", result[0], "_on_merge_to_sheep")
 	
 	var enemies = get_tree().get_nodes_in_group("enemy")
@@ -161,21 +162,20 @@ func _on_merge_sheep(centroid : Vector2):
 	if is_selected():
 		merge_sheep = null
 		$MergeAnimation.stop()
-		$Merge.set_collision_mask_bit(0, false)
+		unsetMergeMask()
 		merge_point = centroid
 		$Sprite.material = null
+
+func unsetMergeMask():
+	$Merge.set_collision_mask_bit(0, false)
 
 func is_merging():
 	return  merge_point != null or merge_sheep != null
 
 func get_merge_point():
 	if merge_point != null and global_position.distance_to(merge_point) < 100:
-		merge_point = null
-		merge_sheep = self
-		$Merge.set_collision_mask_bit(0, true)
-		emit_signal("merge_to_sheep", self)
-		$MergeAnimation.play("Merge")
-	return merge_point if merge_sheep == null else merge_sheep.global_position
+		becomeMergeSheep()
+	return merge_point if merge_sheep == null or not is_instance_valid(merge_sheep) else merge_sheep.global_position
 
 func _on_go_to_sheep(sheep):
 	if is_merging() and sheep.selection_id == selection_id:
@@ -183,5 +183,13 @@ func _on_go_to_sheep(sheep):
 
 
 func _on_Merge_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if body != self and body.is_in_group("Sheep") and body.selection_id == selection_id:
-		body.queue_free() # later I will figure out making consuming sheep bigger
+	if body != self and body.is_in_group("Sheep") and body.selection_id == selection_id and self == merge_sheep:
+		$"/root/GlobalState".merge_sheep(self, body)
+
+func becomeMergeSheep(selection = selection_id):
+	selection_id = selection
+	merge_point = null
+	merge_sheep = self
+	$Merge.set_collision_mask_bit(0, true)
+	emit_signal("merge_to_sheep", self)
+	$MergeAnimation.call_deferred("play", "Merge")
