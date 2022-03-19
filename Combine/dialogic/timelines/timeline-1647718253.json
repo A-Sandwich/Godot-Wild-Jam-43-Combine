@@ -1,0 +1,35 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 1,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 100
+		},
+		{
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "I'm a sheep!\nYou're a Shepard!\nSometimes slimes show up in the pen and cause some trouble...\nSo when that happens we'll all be depending on you to help out.\nYou can select sheep by holding left click and dragging a box around them.\nAfter that just right click on the building.\nGo ahead, give it a try!"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4",
+		"file": "timeline-1647718253.json",
+		"name": "intro"
+	}
+}

@@ -18,4 +18,5 @@ func _ready():
 
 func _on_Goal_body_entered(body):
 	if body.is_in_group("sheep"):
+		$"/root/GlobalState".sheep_saved(body.name)
 		body.queue_free()

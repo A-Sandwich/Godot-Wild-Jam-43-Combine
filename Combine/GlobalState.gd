@@ -5,6 +5,11 @@ var slime = load("res://Characters/Slime.tscn")
 var rng = RandomNumberGenerator.new()
 var bounds = {}
 signal go_to_sheep
+signal game_over
+var sheep_saved = 0
+var slimes_removed = 0
+var sheep_destroyed = 0
+var points_per_sheep = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,3 +58,9 @@ func clamp_vector(position : Vector2, bounds : Vector2):
 	var x = clamp(position.x, bounds.x, bounds.y)
 	var y = clamp(position.x, bounds.x, bounds.y)
 	return Vector2(x, y)
+
+func _on_game_over():
+	emit_signal("game_over", points_per_sheep * sheep_saved)
+
+func sheep_saved(sheep_name):
+	sheep_saved += 1

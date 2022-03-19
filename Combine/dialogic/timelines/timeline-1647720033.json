@@ -1,0 +1,73 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Wow, you figured that out fast for a human!\nNow you'll get points for each sheep you successfully get into the barn.\nFor every Sheep that doesn't make it, well, you'll be penalized."
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Does that all sound fair?"
+		},
+		{
+			"choice": "Yeah!",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Wonderful! Good little human. We appreciate it."
+		},
+		{
+			"choice": "No, I'm here for games, not hearding sheep!",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Look human, you don't want a sheep revolt do you? EXACTLY. Thanks again for helping."
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4",
+		"file": "timeline-1647720033.json",
+		"name": "Outro"
+	}
+}
