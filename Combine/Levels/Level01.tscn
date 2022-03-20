@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Levels/Level01.gd" type="Script" id=1]
+[ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Levels/Parts/Goal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Levels/Parts/WorldParts.tres" type="TileSet" id=4]
+[ext_resource path="res://grass.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Characters/Slime.tscn" type="PackedScene" id=6]
+
+[node name="Level01" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="TileMap" parent="." instance=ExtResource( 5 )]
+
+[node name="TileMap2" type="TileMap" parent="."]
+position = Vector2( 10, 0 )
+scale = Vector2( 10, 10 )
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -458756, 1, 0, -458755, 7, 0, -458754, 7, 0, -458753, 7, 0, -524288, 7, 0, -524287, 7, 0, -524286, 7, 0, -524285, 7, 0, -524284, 7, 0, -524283, 7, 0, -524282, 7, 0, -524281, 7, 0, -524280, 7, 0, -524279, 7, 0, -524278, 7, 0, -524277, 7, 0, -524276, 2, 0, -393220, 6, 0, -458750, 35, 0, -458746, 34, 0, -458740, 6, 0, -327684, 6, 0, -393212, 48, 0, -393209, 20, 0, -393204, 6, 0, -262148, 6, 0, -327676, 48, 0, -327668, 6, 0, -196612, 6, 0, -262143, 20, 0, -262140, 48, 0, -262132, 6, 0, -131076, 6, 0, -196596, 6, 0, -65540, 6, 0, -131060, 6, 0, -4, 6, 0, -65524, 6, 0, 65532, 6, 0, 6, 20, 0, 12, 6, 0, 131068, 6, 0, 65536, 20, 0, 65548, 6, 0, 196604, 6, 0, 131084, 6, 0, 262140, 6, 0, 262141, 36, 0, 196619, 36, 0, 196620, 6, 0, 327676, 6, 0, 327677, 36, 0, 262155, 36, 0, 262156, 6, 0, 393212, 6, 0, 393213, 36, 0, 327691, 36, 0, 327692, 6, 0, 458748, 4, 0, 458749, 7, 0, 458750, 7, 0, 458751, 7, 0, 393216, 7, 0, 393217, 7, 0, 393218, 7, 0, 393219, 7, 0, 393220, 7, 0, 393221, 7, 0, 393222, 7, 0, 393223, 7, 0, 393224, 7, 0, 393225, 7, 0, 393226, 7, 0, 393227, 7, 0, 393228, 5, 0 )
+
+[node name="Goal" parent="." instance=ExtResource( 3 )]
+position = Vector2( 459, -1477 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="Bounds" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Position2D" parent="Bounds"]
+position = Vector2( -486, -1074 )
+
+[node name="BottomRight" type="Position2D" parent="Bounds"]
+position = Vector2( 1927, 907 )
+
+[node name="Slime" parent="." instance=ExtResource( 6 )]
+position = Vector2( 705, -844 )

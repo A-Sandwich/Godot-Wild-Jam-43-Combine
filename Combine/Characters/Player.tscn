@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Characters/Player.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Typefaces/DotGothic16-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Characters/Scoreboard.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Typefaces/ScoreBoard.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Characters/HUD.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -28,14 +29,30 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 6 )
 
 [node name="Button" type="Button" parent="HUD"]
-margin_left = 16.0
-margin_top = 532.0
-margin_right = 177.0
-margin_bottom = 575.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = -75.0
+margin_right = 191.0
+margin_bottom = -32.0
 custom_fonts/font = SubResource( 2 )
 text = "Merge Sheep"
+
+[node name="ResetLevel" type="Button" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -194.0
+margin_top = -75.0
+margin_right = -28.0
+margin_bottom = -27.0
+custom_fonts/font = ExtResource( 5 )
+text = "Reset Level"
 
 [node name="Scoreboard" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -51,93 +68,118 @@ margin_bottom = 216.0
 
 [node name="SheepSavedBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 105.0
+margin_bottom = 42.0
 alignment = 1
 
 [node name="SheepSavedLabel" type="Label" parent="Scoreboard/VBoxContainer/SheepSavedBox"]
-margin_left = 276.0
-margin_right = 708.0
-margin_bottom = 105.0
+margin_left = 419.0
+margin_right = 587.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "Sheep Saved:"
 align = 2
 valign = 1
 
 [node name="SheepSaved" type="Label" parent="Scoreboard/VBoxContainer/SheepSavedBox"]
-margin_left = 712.0
-margin_right = 748.0
-margin_bottom = 105.0
+margin_left = 591.0
+margin_right = 605.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
 
 [node name="SheepLostBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
-margin_top = 109.0
+margin_top = 46.0
 margin_right = 1024.0
-margin_bottom = 214.0
+margin_bottom = 88.0
 alignment = 1
 
 [node name="SheepLostLabel" type="Label" parent="Scoreboard/VBoxContainer/SheepLostBox"]
-margin_left = 294.0
-margin_right = 689.0
-margin_bottom = 105.0
+margin_left = 426.0
+margin_right = 580.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "Sheep Lost:"
 align = 2
 valign = 1
 
 [node name="SheepLost" type="Label" parent="Scoreboard/VBoxContainer/SheepLostBox"]
-margin_left = 693.0
-margin_right = 729.0
-margin_bottom = 105.0
+margin_left = 584.0
+margin_right = 598.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
 
 [node name="SlimesDestroyedBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
-margin_top = 218.0
+margin_top = 92.0
 margin_right = 1024.0
-margin_bottom = 323.0
+margin_bottom = 134.0
 alignment = 1
 
 [node name="SlimesDestroyedLabel" type="Label" parent="Scoreboard/VBoxContainer/SlimesDestroyedBox"]
-margin_left = 168.0
-margin_right = 815.0
-margin_bottom = 105.0
+margin_left = 383.0
+margin_right = 622.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "Slimes Destroyed:"
 align = 2
 valign = 1
 
 [node name="SlimesDestroyed" type="Label" parent="Scoreboard/VBoxContainer/SlimesDestroyedBox"]
-margin_left = 819.0
-margin_right = 855.0
-margin_bottom = 105.0
+margin_left = 626.0
+margin_right = 640.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
 
 [node name="PointsBox" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
-margin_top = 327.0
+margin_top = 138.0
 margin_right = 1024.0
-margin_bottom = 432.0
+margin_bottom = 180.0
 alignment = 1
 
 [node name="PointsLabel" type="Label" parent="Scoreboard/VBoxContainer/PointsBox"]
-margin_left = 366.0
-margin_right = 617.0
-margin_bottom = 105.0
+margin_left = 454.0
+margin_right = 552.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "Points:"
 align = 2
 valign = 1
 
 [node name="Points" type="Label" parent="Scoreboard/VBoxContainer/PointsBox"]
-margin_left = 621.0
-margin_right = 657.0
-margin_bottom = 105.0
+margin_left = 556.0
+margin_right = 570.0
+margin_bottom = 42.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
+
+[node name="NextLevel" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
+margin_top = 184.0
+margin_right = 1024.0
+margin_bottom = 184.0
+alignment = 1
+
+[node name="NextLevelButton" type="Button" parent="Scoreboard/VBoxContainer/NextLevel"]
+visible = false
+margin_left = 435.0
+margin_right = 588.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 5 )
+text = "Next Level"
+
+[node name="Label" type="Label" parent="Scoreboard"]
+visible = false
+margin_left = 435.0
+margin_top = 37.0
+margin_right = 575.0
+margin_bottom = 79.0
+custom_fonts/font = ExtResource( 5 )
+text = "Game Stats"
 
 [connection signal="body_entered" from="Selector" to="." method="_on_Selector_body_entered"]
 [connection signal="body_exited" from="Selector" to="." method="_on_Selector_body_exited"]
 [connection signal="mouse_entered" from="HUD/Button" to="." method="_on_Button_mouse_entered"]
 [connection signal="mouse_exited" from="HUD/Button" to="." method="_on_Button_mouse_exited"]
 [connection signal="pressed" from="HUD/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HUD/ResetLevel" to="Scoreboard" method="_on_ResetLevel_pressed"]
+[connection signal="pressed" from="Scoreboard/VBoxContainer/NextLevel/NextLevelButton" to="Scoreboard" method="_on_NextLevelButton_pressed"]

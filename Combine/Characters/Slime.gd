@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var health = 100
-var attack_power = 10
+var attack_power = 8
 var sheepies = {}
 var target_entity
 var rng = RandomNumberGenerator.new()
@@ -16,7 +16,10 @@ func _ready():
 	
 
 func _process(delta):
+	var previous_position = global_position
 	move()
+	if previous_position.distance_to(global_position) < 1:
+		target_entity = null
 
 func move():
 	var moveTowards = Vector2.ZERO
@@ -108,6 +111,7 @@ func damage(damageAmount):
 	$AnimatedSprite.modulate.r = 1
 	$DamageAnimation.play_backwards("Damage")
 	if health <= 0:
+		$"/root/GlobalState".slime_destroyed()
 		queue_free()
 
 

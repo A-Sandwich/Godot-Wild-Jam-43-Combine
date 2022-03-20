@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hit_00.mp3-09d7e92f62ed74ccd8742dcd5b694ebf.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Hit_00.mp3"
+dest_files=[ "res://.import/Hit_00.mp3-09d7e92f62ed74ccd8742dcd5b694ebf.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

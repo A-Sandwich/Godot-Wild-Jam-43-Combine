@@ -18,6 +18,7 @@ func _ready():
 	connect("game_over", $"/root/GlobalState", "_on_game_over")
 	add_child(new_dialog)
 	get_tree().paused = true
+	$Player/HUD.should_show_merge_sheep = false
 
 func get_bounds():
 	return {

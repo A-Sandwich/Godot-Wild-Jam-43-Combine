@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Collect_Point_01.wav-1f8a46eb61ee3ab61475136f385bde22.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Wav/Collect_Point_01.wav"
+dest_files=[ "res://.import/Collect_Point_01.wav-1f8a46eb61ee3ab61475136f385bde22.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

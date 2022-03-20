@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Climb_Rope_Loop_00.mp3-a98b5fa03026e8022796f641f808518a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Climb_Rope_Loop_00.mp3"
+dest_files=[ "res://.import/Climb_Rope_Loop_00.mp3-a98b5fa03026e8022796f641f808518a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

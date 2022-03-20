@@ -25,7 +25,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if can_move:
+	if can_move and not get_tree().paused:
 		move(delta)
 
 func move(delta : float):
@@ -48,7 +48,7 @@ func move(delta : float):
 func clamp_position(position : Vector2, velocity : Vector2):
 	var potential_position = position + velocity
 	var x = clamp(potential_position.x, (bounds["topLeft"].x - get_viewport().size.x / 2), (bounds["bottomRight"].x + get_viewport().size.x / 2))
-	var y = clamp(potential_position.y, (bounds["topLeft"].y / 2) + 50, (bounds["bottomRight"].y / 2) - 50)
+	var y = clamp(potential_position.y, (bounds["topLeft"].y / 2) + 50, (bounds["bottomRight"].y) + get_viewport().size.y)
 	self.position = Vector2(x, y)
 	
 func _unhandled_input(event):

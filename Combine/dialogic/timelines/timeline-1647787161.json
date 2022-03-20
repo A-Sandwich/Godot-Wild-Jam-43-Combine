@@ -1,0 +1,61 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1647787183.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1647787183.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ya got some tasty lookin' sheep over here"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Yeah... we're gonna have to take care of this... thing.\nThis is what we in the industry call an Enemy.\nYou can help the Sheepies by selecting a group of sheep and right clicking on an enemy.\nWe sheep will attack the enemy before they can destroy any sheep. "
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4",
+		"file": "timeline-1647787161.json",
+		"name": "intro"
+	}
+}

@@ -10,6 +10,27 @@ var sheep_saved = 0
 var slimes_removed = 0
 var sheep_destroyed = 0
 var points_per_sheep = 100
+const point_values = {
+	sheep = 100,
+	slime = 300,
+	dead = -50
+}
+var total_sheep_saved = 0
+var total_slimes_removed = 0
+var total_sheep_destroyed = 0
+var total_sheep_saved_game = 0
+var total_slimes_removed_game = 0
+var total_sheep_destroyed_game = 0
+var level_index = 0
+
+
+const levels = [
+	"res://Levels/Level00.tscn",
+	"res://Levels/Level01.tscn",
+	"res://Levels/Level02.tscn",
+	"res://Levels/Level03.tscn",
+	"res://Levels/Level04.tscn"
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,9 +45,15 @@ func spawn_sheepy_bois(number_of_sheep):
 		sheep.bounds = bounds
 		var scale = rng.randf_range(1.0, 2.0)
 		sheep.scale = Vector2(scale, scale)
-		sheep.global_position = Vector2(rng.randf_range(bounds["topLeft"].x, bounds["bottomRight"].x),
-			rng.randf_range(bounds["topLeft"].y, bounds["bottomRight"].y))
+		sheep.global_position = get_valid_global_position()
 		get_tree().get_root().call_deferred("add_child", sheep)
+
+func get_valid_global_position():
+	var potential_position = Vector2(rng.randf_range(bounds["topLeft"].x, bounds["bottomRight"].x),
+			rng.randf_range(bounds["topLeft"].y, bounds["bottomRight"].y))
+	
+	return potential_position
+
 
 func spawn_enemy(enemy_global_position, scale, health):
 	var new_enemy = slime.instance()
@@ -36,6 +63,11 @@ func spawn_enemy(enemy_global_position, scale, health):
 	new_enemy.health = health
 	get_tree().get_root().call_deferred("add_child", new_enemy)
 
+func spawn_enemies(number_of_slimes):
+	var new_enemy = slime.instance()
+	new_enemy.global_position = get_valid_global_position()
+	get_tree().get_root().call_deferred("add_child", new_enemy)
+
 func merge_sheep(winning_sheep, losing_sheep):
 	var sheep = sheepy_boi.instance()
 	sheep.bounds = bounds
@@ -43,8 +75,10 @@ func merge_sheep(winning_sheep, losing_sheep):
 	sheep.scale = scale
 	sheep.global_position = winning_sheep.global_position
 	sheep.health = winning_sheep.health + losing_sheep.health
+	sheep.health_total = sheep.health
 	sheep.selection_id = winning_sheep.selection_id
 	sheep.attack_power = winning_sheep.attack_power + losing_sheep.attack_power
+	sheep.speed = winning_sheep.speed + losing_sheep.speed
 	winning_sheep.unsetMergeMask()
 	winning_sheep.global_position = Vector2(-1000000000, 10000000000)
 	losing_sheep.global_position = Vector2(1000000000, 10000000000)
@@ -60,7 +94,44 @@ func clamp_vector(position : Vector2, bounds : Vector2):
 	return Vector2(x, y)
 
 func _on_game_over():
-	emit_signal("game_over", points_per_sheep * sheep_saved, sheep_saved, sheep_destroyed, slimes_removed)
+	total_sheep_saved_game += sheep_saved
+	total_slimes_removed_game += slimes_removed
+	total_sheep_destroyed_game += sheep_destroyed
+	emit_signal("game_over", get_point_total(), sheep_saved, sheep_destroyed, slimes_removed)
 
-func sheep_saved(sheep_name):
+func save_sheep(sheep_name):
 	sheep_saved += 1
+
+func sheep_lost():
+	sheep_destroyed += 1
+
+func slime_destroyed():
+	slimes_removed += 1
+
+func get_point_total():
+	var sheepies = sheep_saved * point_values["sheep"]
+	var slimies = slimes_removed * point_values["slime"]
+	var deadies = sheep_destroyed * point_values["dead"]
+	return sheepies + slimies + deadies
+
+func reset_values():
+	sheep_saved = 0
+	slimes_removed = 0
+	sheep_destroyed = 0
+
+func reload_level():
+	get_tree().paused = false
+	reset_values()
+	get_tree().change_scene(levels[level_index])
+
+func go_to_next_level():
+	get_tree().paused = false
+	reset_values()
+	level_index += 1
+	get_tree().change_scene(levels[level_index])
+	
+func end_game():
+	sheep_saved = total_sheep_saved_game
+	slimes_removed = total_slimes_removed_game
+	sheep_destroyed = total_sheep_destroyed_game
+	_on_game_over()

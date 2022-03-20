@@ -1,0 +1,35 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1647718300.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "These Slime things have me thinking.\nIf slimes can combine together to become a bigger slime... What if we tried it with sheep?\nI bet if you select multiple sheep and click on the button in the bottom left hand corner the those sheep will move together and merge!"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4",
+		"file": "timeline-1647795020.json",
+		"name": "intro"
+	}
+}

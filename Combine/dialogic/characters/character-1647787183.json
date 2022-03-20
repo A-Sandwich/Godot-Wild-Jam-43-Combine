@@ -1,0 +1,21 @@
+{
+	"color": "#ff65b1b8",
+	"description": "",
+	"display_name": "Slime",
+	"display_name_bool": true,
+	"id": "character-1647787183.json",
+	"mirror_portraits": true,
+	"name": "Slime",
+	"nickname": "slime, enemy, enemies, Enemy, thing, slimes, Slimes",
+	"nickname_bool": true,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Assets/sprites/slime-profile.png"
+		}
+	],
+	"scale": 1000,
+	"theme": ""
+}

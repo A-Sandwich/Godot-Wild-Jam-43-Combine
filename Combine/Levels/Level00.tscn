@@ -28,13 +28,7 @@ position = Vector2( 459, -1477 )
 [node name="Bounds" type="Node2D" parent="."]
 
 [node name="TopLeft" type="Position2D" parent="Bounds"]
-position = Vector2( -534, -1127 )
-
-[node name="TopRight" type="Position2D" parent="Bounds"]
-position = Vector2( 2002, -1127 )
-
-[node name="BottomLeft" type="Position2D" parent="Bounds"]
-position = Vector2( -534, 1014 )
+position = Vector2( -476, -1068 )
 
 [node name="BottomRight" type="Position2D" parent="Bounds"]
-position = Vector2( 2002, 1014 )
+position = Vector2( 1927, 913 )

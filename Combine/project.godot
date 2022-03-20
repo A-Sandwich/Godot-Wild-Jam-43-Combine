@@ -87,6 +87,7 @@ config/icon="res://Assets/sprites/sheep.png"
 [autoload]
 
 GlobalState="*res://GlobalState.tscn"
+BackgroundMusic="*res://Levels/Parts/BackgroundMusic.tscn"
 
 [editor_plugins]
 

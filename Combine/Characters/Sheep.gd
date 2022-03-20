@@ -1,12 +1,12 @@
 extends KinematicBody2D
 
-var health = 100
-var attack_power = 3
+var health = 100.0
+var health_total = health
+var attack_power = 6
 var target_location = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
-var speed = 100
+var speed = 200
 var previous_position = Vector2.ZERO
-var jitter = Vector2.ZERO
 var outline_shader = load("res://Characters/outline_shader.tres")
 var stuck_position = Vector2.ZERO
 const INT_MAX = 9223372036854775807
@@ -43,6 +43,7 @@ func connect_signals():
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
 		enemy.connect("enemy_clicked", self, "_on_enemy_clicked")
+	$VisionAnimationPlayer.play("Vision")
 
 func offset_animation():
 	var timer_length = rng.randf_range(0.0, 0.75)
@@ -57,7 +58,8 @@ func _process(delta):
 	if target_location.distance_to(global_position) <= 10 or is_position_invalid():
 		choose_new_location()
 	move_and_slide(get_velocity())
-	update_jitter()
+	if previous_position.distance_to(global_position) < 1:
+		choose_new_location()
 
 func is_position_invalid(position_to_check = global_position):
 	return false
@@ -66,12 +68,12 @@ func is_position_invalid(position_to_check = global_position):
 func get_velocity():
 	if is_merging():
 		var direction = global_position.direction_to(get_merge_point())
-		return (direction + jitter) * speed
+		return (direction) * speed
 	if target_enemy and is_instance_valid(target_enemy):
 		target_location = target_enemy.global_position
 	var direction = global_position.direction_to(target_location)
 	update_sprite(direction)
-	var velocity = (direction + jitter) * speed
+	var velocity = (direction) * speed
 	return velocity
 
 func update_sprite(direction):
@@ -80,21 +82,12 @@ func update_sprite(direction):
 	elif direction.x < 0:
 		$Sprite.flip_h = false
 
-func update_jitter():
-	var previous = previous_position.distance_to(global_position) 
-	if previous < .05:
-		jitter = Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
-		if $Stuck.is_stopped():
-			$Stuck.start()
-			stuck_position = global_position
-
 func choose_new_location():
 	var range_change_x = rng.randi_range(-500, 500)
 	var range_change_y = rng.randi_range(-500, 500)
 	target_location = Vector2(global_position.x + range_change_x, global_position.y + range_change_y)
 	if is_position_invalid(target_location):
 		choose_new_location()
-	jitter = Vector2.ZERO
 
 func highlight():
 	$Sprite.material = outline_shader
@@ -108,6 +101,8 @@ func _on_left_click():
 func _on_right_click(new_position):
 	if not is_selected():
 		return
+	merge_point = null
+	merge_sheep = null
 	target_location = new_position
 
 func is_selected():
@@ -123,10 +118,11 @@ func damage(damageAmount):
 	$HealthBar.visible = true
 	$HealthBar/HealthTimer.start()
 	health -= damageAmount
-	$HealthBar.value = health
+	$HealthBar.value = (health / health_total) * 100
 	$Sprite.modulate.r = 1
 	$DamagePlayer.play_backwards("Damage")
 	if health <= 0:
+		$"/root/GlobalState".sheep_lost()
 		queue_free()
 
 func _on_DamagePlayer_animation_finished(anim_name):

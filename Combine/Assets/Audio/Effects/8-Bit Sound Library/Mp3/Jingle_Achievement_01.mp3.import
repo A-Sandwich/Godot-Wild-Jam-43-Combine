@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Jingle_Achievement_01.mp3-d443a09985cee5d6634ba603cbb946dd.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Jingle_Achievement_01.mp3"
+dest_files=[ "res://.import/Jingle_Achievement_01.mp3-d443a09985cee5d6634ba603cbb946dd.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

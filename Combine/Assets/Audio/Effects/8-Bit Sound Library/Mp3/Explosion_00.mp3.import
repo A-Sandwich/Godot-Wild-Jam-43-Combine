@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Explosion_00.mp3-00f885e5abdbbb34f9b6f3700feabc99.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Explosion_00.mp3"
+dest_files=[ "res://.import/Explosion_00.mp3-00f885e5abdbbb34f9b6f3700feabc99.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

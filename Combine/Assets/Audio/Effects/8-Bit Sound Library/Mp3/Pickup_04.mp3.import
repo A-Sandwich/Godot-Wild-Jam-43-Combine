@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Pickup_04.mp3-5a31e4671d03dc267b8af8fa0d1966c5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Pickup_04.mp3"
+dest_files=[ "res://.import/Pickup_04.mp3-5a31e4671d03dc267b8af8fa0d1966c5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,13 +1,13 @@
 {
-	"color": "#ffffffff",
+	"color": "#ffab7b7b",
 	"description": "",
 	"display_name": "",
 	"display_name_bool": false,
 	"id": "character-1647718300.json",
 	"mirror_portraits": true,
 	"name": "Sheep",
-	"nickname": "",
-	"nickname_bool": false,
+	"nickname": "sheep, Sheepies, sheepies, sheepy, Sheepy",
+	"nickname_bool": true,
 	"offset_x": 0,
 	"offset_y": 0,
 	"portraits": [
@@ -16,6 +16,6 @@
 			"path": "res://Assets/sprites/sheep.png"
 		}
 	],
-	"scale": 100,
+	"scale": 120,
 	"theme": ""
 }

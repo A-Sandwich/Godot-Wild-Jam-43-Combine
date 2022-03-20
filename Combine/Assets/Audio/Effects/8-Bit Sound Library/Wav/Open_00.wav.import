@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Open_00.wav-2b0b0a45b7bcfc3489e08055ff317903.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Wav/Open_00.wav"
+dest_files=[ "res://.import/Open_00.wav-2b0b0a45b7bcfc3489e08055ff317903.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

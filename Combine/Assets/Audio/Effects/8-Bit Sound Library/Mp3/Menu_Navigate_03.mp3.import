@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Menu_Navigate_03.mp3-a449355c3c1de4adc3b8c8b196cde4e9.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Menu_Navigate_03.mp3"
+dest_files=[ "res://.import/Menu_Navigate_03.mp3-a449355c3c1de4adc3b8c8b196cde4e9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

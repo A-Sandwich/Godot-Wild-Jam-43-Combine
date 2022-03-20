@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Jingle_Achievement_01.wav-ba1558ec18fe35dae4cfa1be21114814.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Wav/Jingle_Achievement_01.wav"
+dest_files=[ "res://.import/Jingle_Achievement_01.wav-ba1558ec18fe35dae4cfa1be21114814.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

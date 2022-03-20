@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Collect_Point_01.mp3-ed0ec1bd08a951d48bf1e55f25ce2fc0.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Collect_Point_01.mp3"
+dest_files=[ "res://.import/Collect_Point_01.mp3-ed0ec1bd08a951d48bf1e55f25ce2fc0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

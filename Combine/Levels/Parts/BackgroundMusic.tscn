@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Audio/Music/BeepBox-Song-02.mp3" type="AudioStream" id=1]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+pause_mode = 2
+stream = ExtResource( 1 )
+pitch_scale = 0.9
+autoplay = true

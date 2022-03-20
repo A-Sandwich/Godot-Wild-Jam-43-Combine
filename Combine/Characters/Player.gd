@@ -21,10 +21,9 @@ func _process(delta):
 	if dragging_box:
 		update_box()
 	update()
-	if selection.keys().size() < 1:
-		$HUD/Button.visible = false
-	else:
-		$HUD/Button.visible = true
+
+func are_multiple_sheep_selected():
+	return selection.keys().size() > 1
 
 func _draw():
 	if get_tree().debug_collisions_hint:

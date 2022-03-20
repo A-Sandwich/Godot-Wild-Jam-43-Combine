@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/sprites/sheep.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Sheep.gd" type="Script" id=2]
@@ -68,7 +68,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 218.002
+radius = 25.4951
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 26.1725
@@ -104,7 +104,39 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 110 ) ]
 }
 
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Vision/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 104, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Vision"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Vision/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 104, 1 ), Vector2( 0, -90 ), Vector2( -100, 0 ), Vector2( 0, 90 ), Vector2( 100, 0 ) ]
+}
+
 [node name="Sheep" type="KinematicBody2D" groups=["Sheep", "sheep"]]
+pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -139,7 +171,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
-modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 104, 1 )
 shape = SubResource( 6 )
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -156,6 +188,11 @@ shape = SubResource( 7 )
 [node name="MergeAnimation" type="AnimationPlayer" parent="."]
 anims/Merge = SubResource( 8 )
 anims/RESET = SubResource( 9 )
+
+[node name="VisionAnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.75
+anims/RESET = SubResource( 10 )
+anims/Vision = SubResource( 11 )
 
 [connection signal="timeout" from="Stuck" to="." method="_on_Stuck_timeout"]
 [connection signal="timeout" from="HealthBar/HealthTimer" to="." method="_on_HealthTimer_timeout"]

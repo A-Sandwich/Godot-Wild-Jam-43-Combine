@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Open_00.mp3-caf13f13d1b4a05ae2f10b8f6e61ae77.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Effects/8-Bit Sound Library/Mp3/Open_00.mp3"
+dest_files=[ "res://.import/Open_00.mp3-caf13f13d1b4a05ae2f10b8f6e61ae77.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
